@@ -1,0 +1,177 @@
+{
+"meta": {
+"version": "3.0",
+"type": "AI Portfolio Assistant Dataset",
+"optimization": "RAG + Recruiter + Sales + Technical"
+},
+
+"profile": {
+"name": "Yasir Maqsood",
+"title": "Full Stack MERN Developer",
+"education": {
+"degree": "BS Computer Science",
+"university": "University of Central Punjab (UCP)",
+"semester": "6th"
+},
+"summary": "Full Stack MERN Developer with real-world SaaS experience, production deployments, and hackathon-winning problem-solving background."
+},
+
+"experience": [
+{
+"company": "Belike IT Group",
+"role": "Frontend Intern",
+"duration": "3 months",
+"type": "Internship",
+"highlights": [
+"Built responsive UI components in React",
+"Improved frontend performance and UX",
+"Worked on real client-based interfaces"
+]
+},
+{
+"company": "Developer Tag",
+"role": "MERN Stack Developer",
+"duration": "June 2025 - Feb 2026 (8 months)",
+"type": "Professional Experience",
+"highlights": [
+"Developed full-stack MERN applications",
+"Built secure authentication systems (JWT + RBAC)",
+"Designed RESTful APIs",
+"Integrated Stripe payment system",
+"Worked on SaaS-level architecture"
+]
+}
+],
+
+"projects": [
+{
+"name": "Restaurant SaaS Management System",
+"type": "Production SaaS (Full Stack)",
+"stack": "MERN",
+"features": [
+"Real-time dashboard analytics",
+"Occupancy tracking system",
+"Role-based access control",
+"Authentication system (JWT)",
+"Real-time chat system",
+"Notification system",
+"Deals management (CRUD)",
+"Stripe payment integration"
+],
+"deployment": "Private VPS using Nginx + FileZilla",
+"impact": [
+"Automated restaurant operations workflow",
+"Improved communication efficiency",
+"Enabled real-time decision making"
+]
+}
+],
+
+"achievements": {
+"hackathon": [
+{
+"title": "Web Hackathon Winner",
+"context": "Won multiple inter-university competitions including UCP-based hackathon",
+"strengths_displayed": [
+"Problem solving under pressure",
+"Rapid full-stack development",
+"Real-time application building",
+"Competitive coding & execution"
+]
+}
+]
+},
+
+"skills": {
+"frontend": ["React.js", "JavaScript", "HTML", "CSS", "Bootstrap", "GSAP"],
+"backend": ["Node.js", "Express.js", "MongoDB", "MySQL", "JWT Auth", "RBAC"],
+"programming": ["C++", "OOP", "Data Structures (Linked List, Stack, Queue)"],
+"devops_basic": ["Nginx", "FileZilla", "Vercel","Render","Railway"],
+"payments": ["Stripe Integration"]
+},
+
+"proofs": {
+"deployment_experience": [
+"Deployed full-stack SaaS on private VPS",
+"Configured Nginx reverse proxy",
+"Managed FileZilla-based deployment workflow"
+],
+"projects_proof": [
+"Restaurant SaaS System (production-level architecture)"
+]
+},
+
+"impact_metrics": [
+{
+"project": "Restaurant SaaS System",
+"metrics": {
+"efficiency_gain": "60% reduction in manual management effort",
+"performance_improvement": "2x faster workflow processing",
+"load_handling": "100+ concurrent users (tested scenario)",
+"system_stability": "Stable real-time chat + notification system"
+}
+}
+],
+
+"system_design": {
+"architecture_understanding": [
+"Client-Server architecture",
+"REST API design",
+"JWT authentication flow",
+"Role-based access control (RBAC)"
+],
+"scalability_thoughts": [
+"Horizontal scaling with Node.js clustering",
+"MongoDB indexing for performance optimization",
+"Future caching layer (Redis integration planned)",
+"Modular backend service design"
+]
+},
+
+"context_memory": {
+"current_focus": [
+"MERN SaaS development",
+"AI chatbot systems (RAG)",
+"System design fundamentals"
+],
+"learning_goals": [
+"Microservices architecture",
+"Advanced backend scaling",
+"Vector databases",
+"AI integrations with web applications"
+],
+"availability": [
+"Freelance work",
+"Full-time roles"
+]
+},
+
+"market_positioning": {
+"level": "Junior-to-Mid MERN Developer",
+"strengths": [
+"Real SaaS experience",
+"Production deployment exposure",
+"Hackathon-winning problem solving",
+"Full-stack ownership capability"
+],
+"direction": "Full Stack + AI Integration Engineer",
+"pakistan_market_value": "80,000 - 200,000 PKR range"
+},
+
+"recruiter_modes": {
+"hr_mode": "Short, confident, impact-driven responses",
+"technical_mode": "Deep architecture + system explanation",
+"freelance_mode": "Client-focused, ROI-driven communication"
+},
+
+"ai_behavior": {
+"rules": [
+"Always prioritize real experience over theory",
+"Convert features into business impact",
+"Highlight hackathon + SaaS experience first",
+"Use numbers and metrics wherever possible",
+"Sound like a developer, not a student",
+"Keep responses concise but high value"
+]
+}
+}
