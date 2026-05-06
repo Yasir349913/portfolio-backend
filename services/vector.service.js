@@ -8,7 +8,6 @@ const client = new MongoClient(process.env.MONGODB_URI);
 let db;
 let collection;
 
-// lazy connect (best practice)
 async function connectDB() {
   if (!db) {
     await client.connect();
@@ -18,23 +17,27 @@ async function connectDB() {
   return collection;
 }
 
-// vector search
 export async function vectorSearch(queryEmbedding) {
-  const col = await connectDB();
+  try {
+    const col = await connectDB();
 
-  const results = await col
-    .aggregate([
-      {
-        $vectorSearch: {
-          index: "vector_index",
-          path: "embedding",
-          queryVector: queryEmbedding,
-          numCandidates: 100,
-          limit: 5,
+    const results = await col
+      .aggregate([
+        {
+          $vectorSearch: {
+            index: "vector_index",
+            path: "embedding",
+            queryVector: queryEmbedding,
+            numCandidates: 100,
+            limit: 5,
+          },
         },
-      },
-    ])
-    .toArray();
+      ])
+      .toArray();
 
-  return results;
+    return results;
+  } catch (err) {
+    console.log("⚠️ Vector search failed:", err.message);
+    return [];
+  }
 }

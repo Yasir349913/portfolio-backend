@@ -1,19 +1,31 @@
-import { getOpenAI } from "../config/openai.js";
+import dotenv from "dotenv";
+dotenv.config();
 
-// 🧠 safe embedding function
 export async function createEmbedding(text) {
   try {
-    const openai = getOpenAI();
-
-    const res = await openai.embeddings.create({
-      model: "text-embedding-3-small",
-      input: text,
+    const res = await fetch("https://openrouter.ai/api/v1/embeddings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "HTTP-Referer": "https://yasir-maqsood-qbwc.vercel.app",
+        "X-Title": "Yasir Portfolio",
+      },
+      body: JSON.stringify({
+        model: "openai/text-embedding-3-small",
+        input: text,
+      }),
     });
 
-    return res.data[0].embedding;
-  } catch (err) {
-    console.log("⚠️ Embedding failed, using fallback");
+    const data = await res.json();
 
+    if (!data?.data?.[0]?.embedding) {
+      throw new Error("No embedding returned");
+    }
+
+    return data.data[0].embedding;
+  } catch (err) {
+    console.log("⚠️ Embedding failed, using fallback:", err.message);
     return Array(1536).fill(0.01);
   }
 }
