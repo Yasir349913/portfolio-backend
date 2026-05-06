@@ -1,19 +1,19 @@
-import { openai } from "../config/openai.js";
+import { getOpenAI } from "../config/openai.js";
 
-// 🧠 safe embedding function (production + fallback)
+// 🧠 safe embedding function
 export async function createEmbedding(text) {
   try {
+    const openai = getOpenAI();
+
     const res = await openai.embeddings.create({
       model: "text-embedding-3-small",
       input: text,
     });
 
     return res.data[0].embedding;
-
   } catch (err) {
-    console.log("⚠️ OpenAI failed, using mock embedding");
+    console.log("⚠️ Embedding failed, using fallback");
 
-    // fallback (so pipeline never breaks)
     return Array(1536).fill(0.01);
   }
 }

@@ -1,47 +1,47 @@
-import { openai } from "../config/openai.js";
+import { getOpenAI } from "../config/openai.js";
 import { createEmbedding } from "./embedding.service.js";
 import { vectorSearch } from "./vector.service.js";
 
 export async function generateChatResponse(message) {
   try {
-    // 1. Create embedding
+    console.log("📩 Message:", message);
+    console.log("🔑 ENV CHECK:", !!process.env.OPENROUTER_API_KEY);
+
+    // 🧠 STEP 1: embedding
+    console.log("🧠 Creating embedding...");
     const queryEmbedding = await createEmbedding(message);
+    console.log("✅ Embedding done");
 
-    // 2. Vector search
+    // 🔎 STEP 2: vector search
+    console.log("🔎 Running vector search...");
     const matches = await vectorSearch(queryEmbedding);
+    console.log("📊 Matches:", matches?.length || 0);
 
-    const context = matches.map((m) => m.text).join("\n");
+    const context = matches?.map((m) => m.text).join("\n") || "";
 
-    // 3. AI Response (OpenRouter)
+    // 🤖 STEP 3: OpenRouter
+    console.log("🤖 Getting OpenAI client...");
+    const openai = getOpenAI();
+
+    console.log("🚀 Calling OpenRouter API...");
+
     const completion = await openai.chat.completions.create({
-      model: "meta-llama/llama-3-8b-instruct", // ✅ FIXED
+      // 🔥 FIXED MODEL (IMPORTANT)
 
+      model: "openai/gpt-4o-mini",
       messages: [
         {
           role: "system",
           content: `
 You are Yasir Maqsood's AI assistant.
 
-Your job:
-- Act like a professional recruiter assistant
-- Answer ONLY from provided context
-- Highlight:
-  • MERN stack experience
-  • SaaS project (Restaurant system)
-  • Hackathon winner
-  • Deployment experience
+Rules:
+- Be concise
+- Be professional
+- Act like recruiter assistant
+- Focus on MERN, SaaS, AI, projects
 
-Style:
-- Short
-- Confident
-- Professional
-- Impact-focused (numbers if possible)
-
-If answer not in context:
-Say: "I don’t have that information yet."
-
---------------------
-CONTEXT:
+Context:
 ${context}
           `,
         },
@@ -55,19 +55,20 @@ ${context}
       max_tokens: 300,
     });
 
+    console.log("✅ AI response received");
+
     return {
       reply:
-        completion?.choices?.[0]?.message?.content ||
-        "⚠️ No response generated",
-      sources: matches.map((m) => m.text),
+        completion?.choices?.[0]?.message?.content || "No response generated",
+      sources: matches?.map((m) => m.text) || [],
     };
   } catch (err) {
-    console.error("❌ Chat Service Error:", err.message);
+    console.error("❌ FULL CHAT ERROR:");
+    console.error(err?.response?.data || err.message);
 
-    // 🧠 fallback (important for demo stability)
     return {
       reply:
-        "⚠️ AI is temporarily unavailable, but Yasir is a MERN Stack Developer with SaaS and hackathon experience.",
+        "⚠️ AI temporarily unavailable, but Yasir is a MERN Stack Developer with SaaS & AI experience.",
       sources: [],
     };
   }
